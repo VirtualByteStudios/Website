@@ -6,6 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 // Analytical tools
 import { Analytics } from "@vercel/analytics/react";
+import GTag from "@/components/GTag";
 
 export const metadata: Metadata = {
   title: "VirtualByte",
@@ -21,7 +22,9 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={inter.className}>
         {children}
+        <GTag />
         <Analytics />
+        
       </body>
     </html>
   );
