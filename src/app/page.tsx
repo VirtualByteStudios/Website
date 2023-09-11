@@ -43,7 +43,7 @@ export default function Home() {
               rel="noreferrer"
               className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
             >
-              Contact
+              WIKI
             </Link>
           </div>
         </main>
