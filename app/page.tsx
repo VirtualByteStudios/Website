@@ -13,12 +13,12 @@ export default function Home() {
               VirtualByte Studios
             </span>
           </div>
-          <a
+          {/* <a
             href="mailto:calum@virtualbyte.co.uk"
             className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             Contact Me
-          </a>
+          </a> */}
         </div>
       </header>
 
@@ -33,20 +33,13 @@ export default function Home() {
         </div>
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-28 text-center sm:py-36">
           <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl">
-            Contract Programming and UI for Games
+            Contract Programming and UI Help for Games
           </h1>
           <p className="mx-auto max-w-2xl text-balance text-base text-zinc-200 sm:text-lg">
             VirtualByte partners with studios and creators to ship robust
             gameplay systems, tools, and polished user interfaces.
           </p>
-          <div className="mt-2 flex items-center justify-center gap-3">
-            <a
-              href="mailto:calum@virtualbyte.co.uk"
-              className="rounded-md bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow hover:bg-blue-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            >
-              Contact Me
-            </a>
-          </div>
+          <div className="mt-2 flex items-center justify-center gap-3"></div>
         </div>
       </section>
 
@@ -79,8 +72,7 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-4 py-6">
         <div className="rounded-xl border border-blue-400/30 bg-blue-500/10 p-6 text-center">
           <p className="text-sm font-medium text-blue-100 sm:text-base">
-            Polished code and UI delivered across experiences reaching millions
-            of players.
+            Currently closed for new projects
           </p>
         </div>
       </section>
@@ -97,7 +89,7 @@ export default function Home() {
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 py-20 sm:grid-cols-2 sm:gap-10 sm:py-24">
           <div>
             <p className="text-xs uppercase tracking-widest text-blue-300/80">
-              Current Work
+              Personal Work
             </p>
             <h2 className="mt-2 text-3xl font-semibold text-white sm:text-4xl">
               CL Facility Roleplay
@@ -125,7 +117,7 @@ export default function Home() {
                 rel="noreferrer"
                 className="rounded-md border border-blue-300/40 px-4 py-2 font-medium text-blue-200 hover:bg-blue-400/10"
               >
-                Client: ConX Studios LLC
+                ConX Studios LLC
               </a>
             </div>
           </div>
@@ -137,7 +129,7 @@ export default function Home() {
               </div>
             </div>
             <div className="rounded-lg border border-white/15 bg-white/5 p-4 text-center">
-              <div className="text-3xl font-semibold text-white">2M</div>
+              <div className="text-3xl font-semibold text-white">3M+</div>
               <div className="text-xs uppercase tracking-wide text-zinc-300">
                 Unique users
               </div>
@@ -146,7 +138,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-16">
+      {/* <section className="mx-auto max-w-6xl px-4 py-16">
         <div className="rounded-xl border border-border bg-card/50 p-8 text-center">
           <p className="text-xs uppercase tracking-widest text-blue-300/80">
             Coming Soon
@@ -178,7 +170,7 @@ export default function Home() {
             </a>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <footer className="border-t border-border/60">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-6 text-sm text-muted-foreground">
