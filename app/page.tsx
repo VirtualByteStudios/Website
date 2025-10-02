@@ -1,4 +1,37 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
 export default function Home() {
+  const screenshots = Array.from(
+    { length: 13 },
+    (_, i) => `/Screenshot${i + 1}.png`
+  );
+  const [current, setCurrent] = useState(0);
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
+  const [viewerIndex, setViewerIndex] = useState<number | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+
+  const goTo = (index: number) => {
+    const total = screenshots.length;
+    const nextIndex = ((index % total) + total) % total;
+    setCurrent(nextIndex);
+  };
+
+  const goNext = () => setCurrent((c) => (c + 1) % screenshots.length);
+  const goPrev = () =>
+    setCurrent((c) => (c - 1 + screenshots.length) % screenshots.length);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (isViewerOpen && e.key === "Escape") {
+        setIsViewerOpen(false);
+        setViewerIndex(null);
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [isViewerOpen]);
   return (
     <main className="min-h-screen bg-background text-foreground">
       <header className="sticky top-0 z-50 w-full border-b border-border/60 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -10,7 +43,7 @@ export default function Home() {
               className="h-9 w-9"
             />
             <span className="text-lg font-semibold tracking-tight">
-              VirtualByte Studios
+              VirtualByte Studios / Calum Scott
             </span>
           </div>
           {/* <a
@@ -25,7 +58,7 @@ export default function Home() {
       <section className="relative isolate">
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <img
-            src="/bg.png"
+            src="/Screenshot8.png"
             alt="Background"
             className="h-full w-full object-cover"
           />
@@ -33,13 +66,82 @@ export default function Home() {
         </div>
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 px-4 py-28 text-center sm:py-36">
           <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl">
-            Contract Programming and UI Help for Games
+            Programming and UI Help for Games
           </h1>
           <p className="mx-auto max-w-2xl text-balance text-base text-zinc-200 sm:text-lg">
             VirtualByte partners with studios and creators to ship robust
             gameplay systems, tools, and polished user interfaces.
           </p>
           <div className="mt-2 flex items-center justify-center gap-3"></div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-16">
+        <h3 className="mb-6 text-2xl font-semibold">Gallery</h3>
+        <div className="relative rounded-xl border border-border/60 bg-card/50 p-4">
+          <div className="relative">
+            <div className="overflow-hidden rounded-lg">
+              <div
+                ref={trackRef}
+                className="flex transition-transform duration-500 ease-out"
+                style={{ transform: `translateX(-${current * 100}%)` }}
+              >
+                {screenshots.map((src, idx) => (
+                  <div key={src} className="w-full flex-none">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsViewerOpen(true);
+                        setViewerIndex(idx);
+                      }}
+                      className="block w-full"
+                    >
+                      <div className="flex items-center justify-center overflow-hidden bg-black/70">
+                        <img
+                          src={src}
+                          alt={`Screenshot ${idx + 1}`}
+                          className="h-full w-full object-contain"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <button
+              type="button"
+              aria-label="Previous image"
+              onClick={goPrev}
+              className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white shadow hover:bg-black/70 focus:outline-none"
+            >
+              ‹
+            </button>
+            <button
+              type="button"
+              aria-label="Next image"
+              onClick={goNext}
+              className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2 text-white shadow hover:bg-black/70 focus:outline-none"
+            >
+              ›
+            </button>
+          </div>
+
+          <div className="mt-4 flex items-center justify-center gap-2">
+            {screenshots.map((_, idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => goTo(idx)}
+                className={`h-2 w-2 rounded-full ring-1 ring-inset ring-white/10 transition-colors ${
+                  current === idx
+                    ? "bg-zinc-200"
+                    : "bg-zinc-500 hover:bg-zinc-400"
+                }`}
+                aria-label={`Go to screenshot ${idx + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -68,6 +170,27 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {isViewerOpen && viewerIndex !== null && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4"
+          onClick={() => {
+            setIsViewerOpen(false);
+            setViewerIndex(null);
+          }}
+        >
+          <div
+            className="max-h-[90vh] max-w-[95vw]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={screenshots[viewerIndex]}
+              alt={`Screenshot ${viewerIndex + 1}`}
+              className="max-h-[90vh] max-w-[95vw] object-contain"
+            />
+          </div>
+        </div>
+      )}
 
       <section className="mx-auto max-w-6xl px-4 py-6">
         <div className="rounded-xl border border-blue-400/30 bg-blue-500/10 p-6 text-center">
