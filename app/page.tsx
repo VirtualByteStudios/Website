@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export default function Home() {
   const screenshots = Array.from(
     { length: 13 },
-    (_, i) => `/Screenshot${i + 1}.png`
+    (_, i) => `/Screenshot${i + 1}-min.png`
   );
   const [current, setCurrent] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
@@ -57,10 +58,13 @@ export default function Home() {
 
       <section className="relative isolate">
         <div className="absolute inset-0 -z-10 overflow-hidden">
-          <img
-            src="/Screenshot8.png"
+          <Image
+            src="/Screenshot8-min.png"
             alt="Background"
-            className="h-full w-full object-cover"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-black/60" />
         </div>
@@ -96,11 +100,15 @@ export default function Home() {
                       }}
                       className="block w-full"
                     >
-                      <div className="flex items-center justify-center overflow-hidden bg-black/70">
-                        <img
+                      <div className="relative h-[60vh] sm:h-[65vh] md:h-[70vh] bg-black/70">
+                        <Image
                           src={src}
                           alt={`Screenshot ${idx + 1}`}
-                          className="h-full w-full object-contain"
+                          fill
+                          className="object-contain"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1152px"
+                          priority={idx === 0}
+                          quality={75}
                         />
                       </div>
                     </button>
