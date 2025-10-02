@@ -100,7 +100,7 @@ export default function Home() {
                       }}
                       className="block w-full"
                     >
-                      <div className="relative h-[60vh] sm:h-[65vh] md:h-[70vh] bg-black/70">
+                      <div className="relative h-[50vh] sm:h-[50vh] md:h-[50vh] bg-black/70">
                         <Image
                           src={src}
                           alt={`Screenshot ${idx + 1}`}
